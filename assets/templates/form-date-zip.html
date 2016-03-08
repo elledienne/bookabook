@@ -1,6 +1,18 @@
 <div class="form-group">
-  <label for="something">Something</label>
-  <input type="text" class="form-control" name="some" ng-model="thing">
+
+  <h1>When would you like to book?</h1>
+
+  <datepicker>
+    <input ng-model="date" date-format="" type="text" placeholder="Select date">
+  </datepicker>
+
+  <div>
+    <input ng-model="time" type="text" name="some" placeholder="Select time">
+    <label><input ng-model="timeIsFlexible" type="checkbox" name="time-flex"> I can be flexible with time</label>
+  </div>
+
+  <h1>Please enter your zip code</h1>
+  <input ng-model="zip" type="text" placeholder="Zip code">
 </div>
 
 <a ui-sref="form.cleaning-details" class="">Next</a>

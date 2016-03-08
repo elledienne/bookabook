@@ -1,6 +1,23 @@
 <div class="form-group">
-  <label for="something">Something</label>
-  <input type="text" class="form-control" name="some" ng-model="thing">
+
+  <h1>How much time do you need?</h1>
+
+  <div>
+    <!-- <input ng-model="duration" type="text" name="some" placeholder="Duration in hours"> -->
+    <select ng-model="duration" required>
+      <option value="" disabled selected hidden>Duration in hours</option>
+      <option ng-repeat="option in data.availableOptions" value="{{option.id}}">{{option.name}}</option>
+    </select>
+    <b>Our basic cleaning</b>
+  </div>
+
+  <h1>How often</h1>
+  <!-- <input ng-model="frequency" type="text" placeholder="Select frequency"> -->
+  <select ng-model="frequency" required>
+    <option value="" disabled selected hidden>Select frequency</option>
+    <option ng-repeat="option in data.availableOptions" value="{{option.id}}">{{option.name}}</option>
+  </select>
+
 </div>
 
 <a ui-sref="form.cleaning-details" class="">Next</a>

@@ -1,5 +1,6 @@
 angular.module('bookalion', [
-  'ui.router'
+  'ui.router',
+  '720kb.datepicker'
 ])
 .config(['$stateProvider', '$urlRouterProvider',
   function($stateProvider, $urlRouterProvider) {

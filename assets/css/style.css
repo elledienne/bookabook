@@ -1,0 +1,48 @@
+body {
+  font-family: 'Montserrat Hairline', sans-serif;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.no-padding {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.breadcrumbs {
+  font-size: 1em;
+  height: 60px;
+  color: white;
+  background-color: #353535;
+  border-bottom: 2px #D6D6D6 solid;
+}
+
+.breadcrumbs-buttons {
+  height: 60px;
+  line-height: 4;
+}
+
+.breadcrumbs-buttons.active {
+  border-bottom: 3px solid;
+  border-color: rgb(255, 91, 77);
+}
+
+span.page-number {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  border: 1px solid white;
+  border-radius: 50%;
+  line-height: 1.6;
+  vertical-align: middle;
+  text-align: center;
+  margin-right: 5px;
+}
+
+.form-content {
+  background: #F2F2F4;
+}

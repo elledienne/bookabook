@@ -167,7 +167,7 @@ span.page-number {
 }
 
 .dropdown-menu li:hover {
-  
+
 }
 
 .next-page {
@@ -181,4 +181,16 @@ span.page-number {
   border-radius: 0.25em;
   background-color: #ff5b4d;
   
+}
+
+/****************************************/
+
+._720kb-datepicker-calendar-body,
+._720kb-datepicker-calendar-days-header,
+._720kb-datepicker-calendar-header,
+._720kb-datepicker-calendar-years-pagination-pages,
+.datepicker,
+[datepicker],
+datepicker {
+    font-family: inherit;
 }

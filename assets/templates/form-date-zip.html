@@ -2,17 +2,24 @@
 
   <h1>When would you like to book?</h1>
 
-  <datepicker>
-    <input ng-model="date" date-format="" type="text" placeholder="Select date">
+  <datepicker date-format="dd.MM.yyyy" date-set="{{restoreDate()}}">
+    <input ng-model="formData.date" ng-dirty name="date" type="text" placeholder="Select date" readonly>
   </datepicker>
 
   <div>
-    <input ng-model="time" type="text" name="some" placeholder="Select time">
-    <label><input ng-model="timeIsFlexible" type="checkbox" name="time-flex"> I can be flexible with time</label>
+    <!-- <input ng-model="time" type="text" name="some" placeholder="Select time"> -->
+    <!-- <select ng-model="formData.time.value" ng-dirty ng-valid-required name="time" required> -->
+    <input ng-model="formData.time.value" ng-click="togglePicker('timePicker')" ng-dirty ng-valid-required name="time" placeholder="Select date" readonly>
+    <ul ng-show="formSetup.timePicker">
+      <li ng-repeat="time in formSetup.times" ng-click="togglePicker('timePicker')" value="{{time}}">{{time}}</li>
+      <!-- <option value="" ng-selected="formData.time === undefined" disabled hidden>Select time</option> -->
+      <!-- <option ng-selected="formData.time === time" ng-repeat="time in formSetup.times" value="{{time}}">{{time}}</option> -->
+    </ul>
+    <label><input ng-model="formData.time.sFlexible" type="checkbox" name="time-flex"> I can be flexible with time</label>
   </div>
 
   <h1>Please enter your zip code</h1>
-  <input ng-model="zip" type="text" placeholder="Zip code">
+  <input ng-model="formData.zip" ng-dirty ng-minlength="5" ng-maxlength="5" name="zip" type="number" placeholder="Zip code">
 </div>
 
 <a ui-sref="form.cleaning-details" class="">Next</a>

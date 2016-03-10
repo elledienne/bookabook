@@ -13,8 +13,6 @@
     </div>
 
     <div class="col-sm-6 col-xs-12 rel-container">
-      <!-- <input ng-model="time" type="text" name="some" placeholder="Select time"> -->
-      <!-- <select ng-model="formData.time.value" ng-dirty ng-valid-required name="time" required> -->
       <div class="form-icon fa fa-clock-o"></div>
       <label class="dropdown no-padding col-xs-12">
         <input class="col-xs-12" ng-model="formData.time.value" ng-click="togglePicker('time')" ng-dirty ng-valid-required name="time" placeholder="Select time" readonly>
@@ -22,8 +20,6 @@
       <div class="absolute-container">
         <ul class="dropdown-menu col-xs-12" ng-show="formSetup.pickers.time">
           <li ng-repeat="time in formSetup.times" ng-click="formData.time.value = time; togglePicker('time')">{{time}}</li>
-          <!-- <option value="" ng-selected="formData.time === undefined" disabled hidden>Select time</option> -->
-          <!-- <option ng-selected="formData.time === time" ng-repeat="time in formSetup.times" value="{{time}}">{{time}}</option> -->
         </ul>
       </div>
       <div class="fake-the-checkbox" ng-click="formData.time.isFlexible = !formData.time.isFlexible">
@@ -41,9 +37,3 @@
     </div>
   </div>
 </div>
-
-<!-- <div class="row no-padding">
-  <div class="col-sm-12">
-    <a class="col-sm-6 col-sm-offset-3 next-page" ui-sref="form.cleaning-details">Next</a>
-  </div>
-</div> -->

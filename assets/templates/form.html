@@ -2,24 +2,37 @@
 
   <div class="row form-header">
 
-    <div class="col-lg-12 no-padding breadcrumbs">
-      <a class="col-lg-3 breadcrumbs-buttons active" ui-sref-active="active" ui-sref=".date-zip">
-        <span class="page-number">1</span> Date and zip code
-        <div class="breadcrumbs-nav"></div>
-      </a>
-      <a class="col-lg-3 breadcrumbs-buttons" ui-sref-active="active" ui-sref=".cleaning-details"><span class="page-number">2</span> Cleaning detail</a>
-      <a class="col-lg-3 breadcrumbs-buttons" ui-sref-active="active" ui-sref="#"><span class="page-number">3</span> Address</a>
-      <a class="col-lg-3 breadcrumbs-buttons" ui-sref-active="active" ui-sref="#"><span class="page-number">4</span> Payment</a>
+    <div class="col-xs-12 no-padding breadcrumbs" ng-model="navHandler">
+      <button class="col-xs-3 breadcrumbs-buttons" ng-class="{'active': navHandler.length >= 1}" ng-disabled="navHandler.length < 1" ui-sref=".date-zip">
+        <span class="page-number">1</span> <span class="hidden-xs">Date and zip code</span>
+      </button>
+      <button class="col-xs-3 breadcrumbs-buttons" ng-class="{'active': navHandler.length >= 2}" ng-disabled="navHandler.length < 2" ui-sref=".cleaning-details">
+        <span class="page-number">2</span> <span class="hidden-xs">Cleaning detail</span>
+      </button>
+      <button class="col-xs-3 breadcrumbs-buttons" ng-class="{'active': navHandler.length >= 3}" ng-disabled="navHandler.length < 3" ui-sref-active="active" ui-sref="#">
+        <span class="page-number">3</span> <span class="hidden-xs">Address</span>
+      </button>
+      <button class="col-xs-3 breadcrumbs-buttons" ng-class="{'active': navHandler.length >= 4}" ng-disabled="navHandler.length < 4" ui-sref-active="active" ui-sref="#">
+        <span class="page-number">4</span> <span class="hidden-xs">Payment</span>
+      </button>
     </div>
   </div>
 
   <div class="row form-content">
-    <form class="col-lg-10 col-lg-offset-1 bookalion-form" id="bookalion-form" name="requestForm"> <!-- on submit should do something with the data-->
+    <form class="col-sm-10 col-sm-offset-1 bookalion-form" id="bookalion-form" name="requestForm"> <!-- on submit should do something with the data-->
   
       <!-- inject nested state here -->
       <div id="form-views" ui-view></div>
 
     </form>
   </div>
+
+  <div class="row nav-controls">
+    <div class="col-xs-12">
+      <a class="col-xs-6 col-xs-offset-3 next-page" ng-click="goNext()">Next</a>
+      <a class="col-xs-2 previous-page" ng-show="formSetup.nav.prev.length > 0" ng-click="goBack()">Go back</a>
+    </div>
+  </div>
+  
 
 </div>

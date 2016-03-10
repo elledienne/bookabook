@@ -3,6 +3,8 @@
 
 Here is the result of my hard work.
 
+![Screenshot](https://raw.githubusercontent.com/elledienne/bookabook/master/website.png)
+
 As you will see it's not 100% complete, unfortunately my free time is not a lot, and as you can see looking at the time of this commit, I've tried my best.
 
 So what is unfinished/unpolished?

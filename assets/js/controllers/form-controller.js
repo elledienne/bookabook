@@ -1,9 +1,8 @@
 angular.module('bookalion')
-.controller('formController', function ($scope) {
+.controller('formController', function ($scope, $state) {
 
   $scope.formSetup = {
     times: [],
-    // isTimePickerVisible: false,
     durations: [
       {h:'2.5', desc:'Quick cleaning'},
       {h:'3', desc: null},
@@ -16,8 +15,22 @@ angular.module('bookalion')
       {h:'7', desc: null},
       {h:'8', desc: null}
     ],
-    frequencies: ['once', 'weekly'],
-    timePicker: false
+    frequencies: [
+      {freq: 'once', best: false, price: 'from 14,90 €/h'},
+      {freq: 'weekly', best: false, price: 'from 13,90 €/h'},
+      {freq: 'every 2 weeks', best: true, price: 'from 13,90 €/h'},
+      {freq: 'every 4 weeks', best: false, price: 'from 13,90 €/h'}
+    ],
+    pickers: {
+      time: false,
+      duration: false,
+      frequency: false
+    },
+    nav: {
+      next: ['cleaning-details'],
+      curr: ['date-zip'],
+      prev: []
+    }
   };
 
   $scope.formData = {
@@ -26,25 +39,12 @@ angular.module('bookalion')
       value: null,
       isFlexible: false,
     },
-    zip: null
+    zip: null,
+    duration: null,
+    frequency: null
   };
 
-  $scope.restoreDate = function () {
-    if ($scope.formData.date) {
-      var splitDate = $scope.formData.date.split('.');
-      return splitDate[1] + '.' + splitDate[0] + '.' + splitDate[2];
-    }
-    return 'false';
-  };
-
-  $scope.togglePicker = function (popupName) {
-    console.log(popupName)
-    $scope.formSetup[popupName] = !$scope.formSetup[popupName];
-  };
-
-  $scope.goBack = function () {
-    window.history.back();
-  };
+  $scope.navHandler = [true];
 
   var populateTimes = function () {
     var startTime = 6;
@@ -61,12 +61,16 @@ angular.module('bookalion')
     }
   }();
 
+  var showData = function () {
+    alert(JSON.stringify($scope.formData, null, 2))
+  }
+
   var validate = {
     'date-zip': function () {
       var date = $scope.requestForm.date.$dirty;
-      var time = $scope.requestForm.time.$dirty;
+      var time = $scope.requestForm.time.$isEmpty;
       var zip = $scope.requestForm.zip.$valid;
-      // console.log(date, time, zip)
+      console.log(date, time, zip)
       return date && time && zip;
     },
     'cleaning-details': function () {
@@ -74,30 +78,59 @@ angular.module('bookalion')
     }
   };
 
-  $scope.formatDuration = function (data) {
-    var result = data.h + 'h';
-    if (data.desc) {
-      result += ' (' + data.desc + ')'; 
+  $scope.restoreDate = function () {
+    if ($scope.formData.date) {
+      var splitDate = $scope.formData.date.split('.');
+      return splitDate[1] + '.' + splitDate[0] + '.' + splitDate[2];
     }
-    return result;
+    return 'false';
+  };
+
+  $scope.togglePicker = function (popupName) {
+    // console.log(popupName, !$scope.formSetup.pickers[popupName])
+    if (!$scope.formSetup.pickers[popupName]) {
+      for (picker in $scope.formSetup.pickers) {
+        $scope.formSetup.pickers[picker] = false;
+      }
+    } 
+    $scope.formSetup.pickers[popupName] = !$scope.formSetup.pickers[popupName];
+  };
+
+  $scope.goBack = function () {
+    console.log($scope.formSetup.nav.prev)
+    if ($scope.formSetup.nav.prev.length) {
+      var prev = $scope.formSetup.nav.prev.pop();
+      $scope.formSetup.nav.next.push($scope.formSetup.nav.curr.pop());
+      $scope.formSetup.nav.curr.push(prev);
+      $scope.navHandler.pop();
+      $state.go('^.' + prev);
+    }
+  };
+
+  $scope.goNext = function () {
+
+    if ($scope.formSetup.nav.next.length) {
+      if (!validate[$scope.formSetup.nav.curr[0]]()){
+        return;
+      }
+
+      var next = $scope.formSetup.nav.next.shift();
+      $scope.formSetup.nav.prev.push($scope.formSetup.nav.curr.pop());
+      $scope.formSetup.nav.curr.push(next);
+      $scope.navHandler.push(true);
+      $state.go('^.' + next);
+    } else {
+      showData();
+    }
   }
 
-
-  $scope.$on('$stateChangeStart', function(e, toState, toParams, fromState, fromParams) {
-
-    var pageName = fromState.name.split('.')[1];
-
-    if (!validate[pageName]()){
-      e.preventDefault();
-    } else {
-      console.log($scope.formData);
+  $scope.formatDuration = function () {
+    var h = $scope.formData.duration;
+    if (h) {
+      h += 'h';
     }
-    // } else if (toState.module === 'public' && $cookies.Session) {
-    //     // If logged in and transitioning to a logged out page:
-    //     e.preventDefault();
-    //     $state.go('tool.suggestions');
-    // };
-  });
+    return h;
+  }
 
 
 });

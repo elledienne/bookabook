@@ -6,7 +6,7 @@
     <div class="col-sm-6">
       <div class="form-icon fa fa-tachometer"></div>
       <label class="dropdown no-padding col-sm-12">
-        <input class="col-sm-12" ng-model="formatDuration" ng-model-options="{getterSetter: true}" ng-click="togglePicker('duration')" ng-dirty ng-valid-required name="duration" placeholder="Duration in hours" readonly>
+        <input class="col-sm-12" ng-model="formatDuration(formData.duration)" ng-model-options="{getterSetter: true}" ng-click="togglePicker('duration')" ng-dirty ng-valid-required name="duration" placeholder="Duration in hours" readonly>
       </label>
       <div class="absolute-container">
         <ul class="dropdown-menu col-sm-12" ng-show="formSetup.pickers.duration">

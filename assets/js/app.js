@@ -1,4 +1,6 @@
 angular.module('bookalion', [
+  'bookalion.controller.formcontroller',
+  'bookalion.factories.formfactory',
   'ui.router',
   '720kb.datepicker'
 ])

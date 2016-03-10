@@ -2,25 +2,50 @@
 
   <h2>How much time do you need?</h2>
 
-  <div>
-    <!-- <input ng-model="duration" type="text" name="some" placeholder="Duration in hours"> -->
-    <select ng-model="duration" required>
-      <option value="" disabled selected hidden>Duration in hours</option>
-      <option ng-repeat="duration in formSetup.durations" value="{{duration}}">
-        {{formatDuration(duration)}}
-      </option>
-    </select>
-    <b>Our basic cleaning</b>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-icon fa fa-tachometer"></div>
+      <label class="dropdown no-padding col-sm-12">
+        <input class="col-sm-12" ng-model="formatDuration" ng-model-options="{getterSetter: true}" ng-click="togglePicker('duration')" ng-dirty ng-valid-required name="duration" placeholder="Duration in hours" readonly>
+      </label>
+      <div class="absolute-container">
+        <ul class="dropdown-menu col-sm-12" ng-show="formSetup.pickers.duration">
+          <li ng-repeat="duration in formSetup.durations" ng-click="formData.duration = duration.h; togglePicker('duration')">
+            <span ng-if="duration.desc === null">{{duration.h}}h</span>
+            <span ng-if="duration.desc !== null"><b>{{duration.h}}h</b> ({{duration.desc}})</span>
+          </li>
+        </ul>
+      </div>      
+    </div>
+    <div class="col-sm-6 info-container">
+      <div class="info-label">
+        <i class="fa fa-question-circle"></i>
+        <b>Our basic cleaning</b>      
+      </div>  
+    </div>
   </div>
 
-  <h2>How often</h2>
-  <!-- <input ng-model="frequency" type="text" placeholder="Select frequency"> -->
-  <select ng-model="frequency" required>
-    <option value="" disabled selected hidden>Select frequency</option>
-    <option ng-repeat="frequency in formSetup.frequencies" value="{{frequency}}">{{frequency}}</option>
-  </select>
 
+
+
+  <h2>How often</h2>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-icon fa fa-refresh"></div>
+      <label class="dropdown no-padding col-sm-12">
+        <input class="col-sm-12" ng-model="formData.frequency" ng-click="togglePicker('frequency')" ng-dirty ng-valid-required name="frequency" placeholder="Select frequency" readonly>
+      </label>
+      <div class="absolute-container">
+        <ul class="dropdown-menu freq-dropdown col-sm-12" ng-show="formSetup.pickers.frequency">
+          <li ng-repeat="frequency in formSetup.frequencies" ng-click="formData.frequency = frequency.freq; togglePicker('frequency')" ng-class="{'dropdown-bestseller': frequency.best}">
+            <span class="dropdown-menu-freq">{{frequency.freq}}</span><i>{{frequency.price}}</i>
+          </li>
+        </ul>
+      </div>      
+    </div>
+  </div>
 </div>
 
-<a ui-sref="form.cleaning-details" class="">Next</a>
-<a ng-click="goBack()" class="">back</a>
+<!-- <a ui-sref="form.cleaning-details" class="">Next</a>
+<a ng-click="goBack()" class="">back</a> -->
